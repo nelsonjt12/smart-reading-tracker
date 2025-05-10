@@ -1,0 +1,14 @@
+"""
+pandas
+gspread
+oauth2client
+scikit-learn
+matplotlib
+seaborn
+nltk
+spacy
+textblob
+sentence-transformers
+streamlit
+openai  # Optional for advanced recs
+"""
