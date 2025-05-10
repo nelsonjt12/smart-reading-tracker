@@ -1,14 +1,8 @@
-"""
-pandas
-gspread
-oauth2client
-scikit-learn
-matplotlib
-seaborn
-nltk
-spacy
-textblob
-sentence-transformers
-streamlit
-openai  # Optional for advanced recs
-"""
+pandas==2.0.0
+scikit-learn==1.2.2
+matplotlib==3.7.1
+seaborn==0.12.2
+nltk==3.8.1
+streamlit==1.22.0
+textblob==0.17.1
+sentence-transformers==2.2.2
