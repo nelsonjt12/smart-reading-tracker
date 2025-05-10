@@ -1,0 +1,11 @@
+
+===== Rating Analysis Summary =====
+
+Books you've read: 702
+Books you've rated: 354 (50.4% of read books)
+
+Your average rating (excluding null ratings): 4.48 stars
+Goodreads average (for the same books): 3.97 stars
+Goodreads average (for all your read books): 3.94 stars
+
+You rate books 0.52 stars HIGHER than the Goodreads average.
