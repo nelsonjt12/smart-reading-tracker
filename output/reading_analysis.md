@@ -5,9 +5,11 @@
 Total books read: 702
 Books on to-read list: 785
 
-Your average rating: 2.26 stars
-Average Goodreads rating: 3.94 stars
-You rate books 1.68 stars lower than the Goodreads average.
+Your average rating: 4.48 stars (only considering books you've rated)
+Books you've rated: 354 (50.4% of your read books)
+Goodreads average (for the same books): 3.97 stars
+Goodreads average (for all your read books): 3.94 stars
+You rate books 0.52 stars higher than the Goodreads average when you choose to rate a book.
 
 Average book length: 353 pages
 Shortest book: 4 pages
