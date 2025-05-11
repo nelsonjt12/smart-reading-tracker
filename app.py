@@ -30,20 +30,35 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Apply custom scholarly theme
+def load_custom_css():
+    with open("static/css/scholarly_theme.css", "r") as f:
+        return f.read()
+        
+# Apply the custom CSS
+st.markdown(f'<style>{load_custom_css()}</style>', unsafe_allow_html=True)
+
+# Add custom icon font for decorative elements
+st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">', unsafe_allow_html=True)
+
 # App title and description
-st.title("Smart Reading Tracker 📚")
+st.markdown("<h1><i class='fas fa-book-reader'></i> Smart Reading Tracker</h1>", unsafe_allow_html=True)
 st.markdown(
-    """This app analyzes your Goodreads reading data to provide insights and recommendations. 
-    Upload your Goodreads export CSV to get started!"""
+    """<p class='app-description'>This scholarly application analyzes your Goodreads reading data to provide 
+    insightful analytics and personalized book recommendations. Upload your Goodreads export CSV 
+    to begin your literary journey.</p>""", unsafe_allow_html=True
 )
 
 # Sidebar for data loading
-st.sidebar.header("Data Source")
+st.sidebar.markdown("<h2><i class='fas fa-database'></i> Data Source</h2>", unsafe_allow_html=True)
 
-# Input options
+# Add a decorative separator in the sidebar
+st.sidebar.markdown("<div class='sidebar-separator'><span>✦</span><span>✦</span><span>✦</span></div>", unsafe_allow_html=True)
+
+# Input options with more elegant labels
 data_source = st.sidebar.radio(
-    "Select data source:",
-    ["Use sample data", "Upload Goodreads export", "Use existing data"]
+    "Select your literary data source:",
+    ["Browse sample library", "Import personal collection", "Use current library"]
 )
 
 # Initialize session state for data persistence
@@ -84,16 +99,17 @@ def process_data(file_path):
 # Handle data source selection
 file_path = None
 
-if data_source == "Use sample data":
+if data_source == "Browse sample library":
     file_path = "data/goodreads_library_export.csv"
     if os.path.exists(file_path):
         df, results, read_books, tbr_books, author_results, recommendations = process_data(file_path)
     else:
-        st.error("Sample data file not found. Please upload your own data.")
-        data_source = "Upload Goodreads export"
+        st.error("Sample library not found. Please upload your personal collection.")
+        data_source = "Import personal collection"
 
-elif data_source == "Upload Goodreads export":
-    uploaded_file = st.sidebar.file_uploader("Upload your Goodreads export CSV", type="csv")
+elif data_source == "Import personal collection":
+    st.sidebar.markdown("<p class='import-instruction'>Upload your Goodreads library export to analyze your personal reading history.</p>", unsafe_allow_html=True)
+    uploaded_file = st.sidebar.file_uploader("Select CSV file", type="csv")
     if uploaded_file is not None:
         # Save the uploaded file temporarily
         temp_path = os.path.join("data", "temp_upload.csv")
@@ -103,7 +119,7 @@ elif data_source == "Upload Goodreads export":
         # Process the data
         df, results, read_books, tbr_books, author_results, recommendations = process_data(temp_path)
 
-elif data_source == "Use existing data" and st.session_state.data_loaded:
+elif data_source == "Use current library" and st.session_state.data_loaded:
     # Use data already loaded in session
     df = st.session_state.df
     results = st.session_state.results
@@ -111,53 +127,61 @@ elif data_source == "Use existing data" and st.session_state.data_loaded:
     tbr_books = st.session_state.tbr_books
     author_results = st.session_state.author_results
     recommendations = st.session_state.recommendations
+    
+    # Display a confirmation message
+    st.sidebar.success("Using your previously loaded library.")
 
 # Main app content (only show if data is loaded)
 if st.session_state.data_loaded:
-    # Create tabs for different sections
+    # Create tabs for different sections with icons
     tab1, tab2, tab3, tab4 = st.tabs([
-        "Reading Overview",
-        "Reading Patterns",
-        "Author & Genre Analysis",
-        "TBR Recommendations"
+        "📈 Reading Overview",
+        "📊 Reading Patterns",
+        "✍️ Author & Genre Analysis",
+        "📚 TBR Recommendations"
     ])
     
     # Tab 1: Reading Overview
     with tab1:
-        st.header("Reading Overview")
+        st.markdown("<h2><i class='fas fa-chart-line'></i> Reading Overview</h2>", unsafe_allow_html=True)
         
         # Create columns for metrics
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            # Books read
-            total_read = len(read_books) if read_books is not None else 0
-            st.metric("Books Read", total_read)
+            # Books read with elegant styling
+            if read_books is not None:
+                total_books = len(read_books)
+                st.markdown("<h4 class='metric-header'><i class='fas fa-book'></i> Volumes Completed</h4>", unsafe_allow_html=True)
+                st.metric("Volumes in Collection", total_books)
             
             # Average rating
-            if 'avg_my_rating' in results:
+            if results is not None and 'avg_my_rating' in results:
                 avg_rating = results['avg_my_rating']
-                st.metric("Avg. Rating", f"{avg_rating:.2f} ⭐")
+                st.markdown("<h4 class='metric-header'><i class='fas fa-star'></i> Critical Assessment</h4>", unsafe_allow_html=True)
+                st.metric("Your Average Rating", f"{avg_rating:.2f} ⭐")
         
         with col2:
             # Books to read
             tbr_count = len(tbr_books) if tbr_books is not None else 0
             st.metric("Books to Read", tbr_count)
             
-            # Avg pages
-            if 'avg_pages' in results:
-                avg_pages = results['avg_pages']
-                st.metric("Avg. Book Length", f"{avg_pages:.0f} pages")
+            # Pages read with elegant styling
+            if 'Number of Pages' in read_books.columns:
+                total_pages = read_books['Number of Pages'].sum()
+                st.markdown("<h4 class='metric-header'><i class='fas fa-scroll'></i> Pages Traversed</h4>", unsafe_allow_html=True)
+                st.metric("Literary Journey", f"{total_pages:,} pages")
         
         with col3:
             # Author diversity
             if 'author_diversity' in author_results:
                 st.metric("Unique Authors", author_results['author_diversity'])
             
-            # Reading speed
+            # Average time to read with elegant styling
             if 'avg_days_to_read' in results:
                 avg_days = results['avg_days_to_read']
-                st.metric("Avg. Time to Read", f"{avg_days:.1f} days")
+                st.markdown("<h4 class='metric-header'><i class='fas fa-hourglass-half'></i> Reading Pace</h4>", unsafe_allow_html=True)
+                st.metric("Average Immersion", f"{avg_days:.1f} days per volume")
         
         # Reading frequency over time
         st.subheader("Reading Frequency")
@@ -169,7 +193,7 @@ if st.session_state.data_loaded:
     
     # Tab 2: Reading Patterns
     with tab2:
-        st.header("Reading Patterns")
+        st.markdown("<h2><i class='fas fa-chart-bar'></i> Reading Patterns</h2>", unsafe_allow_html=True)
         
         # Rating comparison
         st.subheader("Your Ratings vs. Goodreads Average")
@@ -205,7 +229,7 @@ if st.session_state.data_loaded:
     
     # Tab 3: Author & Genre Analysis
     with tab3:
-        st.header("Author & Genre Analysis")
+        st.markdown("<h2><i class='fas fa-users'></i> Author & Genre Analysis</h2>", unsafe_allow_html=True)
         
         # Top authors
         st.subheader("Most Read Authors")
@@ -238,8 +262,8 @@ if st.session_state.data_loaded:
     
     # Tab 4: TBR Recommendations
     with tab4:
-        st.header("TBR Recommendations")
-        st.markdown("Books from your To-Read list that match your reading preferences:")
+        st.markdown("<h2><i class='fas fa-book'></i> TBR Recommendations</h2>", unsafe_allow_html=True)
+        st.markdown("<p class='recommendation-intro'>Curated selections from your To-Read list that align with your reading preferences:</p>", unsafe_allow_html=True)
         
         if recommendations is not None and not recommendations.empty:
             # Show recommendation plot
@@ -282,7 +306,17 @@ else:
         """
     )
 
-# Footer
+# Footer with enhanced scholarly styling
 st.sidebar.markdown("---")
-st.sidebar.caption("Smart Reading Tracker v1.0")
-st.sidebar.caption("Created using Streamlit and Python")
+st.sidebar.markdown("""
+<div class='footer'>
+    <div class='footer-ornament'>✦ ✦ ✦</div>
+    <div class='footer-title'><i class='fas fa-feather-alt'></i> Smart Reading Tracker</div>
+    <div class='footer-edition'>Scholarly Edition v1.0</div>
+    <div class='footer-subtitle'>Crafted with care for the discerning reader</div>
+    <div class='footer-ornament'>✦</div>
+    <div class='footer-quote'>"A reader lives a thousand lives before he dies... The man who never reads lives only one." <br>― George R.R. Martin</div>
+    <div class='footer-quote'>"Reading is an act of civilization; it's one of the greatest acts of civilization because it takes the free raw material of the mind and builds castles of possibilities." <br>― Ben Okri</div>
+    <div class='footer-ornament'>✦ ✦ ✦</div>
+</div>
+""", unsafe_allow_html=True)

@@ -1,0 +1,426 @@
+/* Scholarly, Elegant Dark Theme for Smart Reading Tracker */
+
+/* Import elegant serif fonts */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+/* Main background and text colors */
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2a2a2a;
+    --accent-gold: #d4af37;
+    --accent-burgundy: #800020;
+    --text-primary: #f0f0f0;
+    --text-secondary: #c5c5c5;
+    --text-muted: #a0a0a0;
+    --border-color: #3a3a3a;
+}
+
+/* Main container styling */
+.main .block-container {
+    padding: 2rem 1.5rem;
+    background-color: var(--bg-primary);
+}
+
+/* Base body styles */
+html, body, [data-testid="stAppViewContainer"] {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Source Serif Pro', Georgia, serif;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+[data-testid="stSidebar"] .block-container {
+    background-color: var(--bg-secondary);
+}
+
+/* Headings styling */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--text-primary);
+}
+
+h1 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h2, .stTabs [data-baseweb="tab-panel"] h2 {
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    color: var(--accent-gold);
+}
+
+h3, .stTabs [data-baseweb="tab-panel"] h3 {
+    font-size: 1.4rem;
+    margin-top: 1.2rem;
+    color: var(--text-primary);
+    border-left: 3px solid var(--accent-gold);
+    padding-left: 0.8rem;
+}
+
+/* Links styling */
+a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-burgundy);
+    text-decoration: underline;
+}
+
+/* Button styling */
+.stButton button, [data-testid="baseButton-secondary"] {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background-color: var(--bg-tertiary) !important;
+    color: var(--accent-gold) !important;
+    border: 1px solid var(--accent-gold) !important;
+    border-radius: 4px !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.stButton button:hover, [data-testid="baseButton-secondary"]:hover {
+    background-color: var(--accent-gold) !important;
+    color: var(--bg-primary) !important;
+}
+
+/* Metric container styling */
+[data-testid="stMetric"] {
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-gold);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 0.3rem !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--text-primary);
+    font-size: 1.8rem !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.8rem !important;
+}
+
+/* Metric header styling */
+.metric-header {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    letter-spacing: 0.5px;
+}
+
+.metric-header i {
+    margin-right: 0.5rem;
+}
+
+/* Text styling */
+p, li, span, div:not([class]) {
+    font-family: 'Source Serif Pro', Georgia, serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Caption styling */
+.stCaption {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Sidebar separator styling */
+.sidebar-separator {
+    text-align: center;
+    margin: 0.5rem 0 1rem 0;
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Tabs styling */
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    border-radius: 4px 4px 0 0;
+    margin-right: 2px;
+    border: 1px solid var(--border-color) !important;
+    border-bottom: none !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: var(--accent-gold);
+}
+
+.stTabs [data-baseweb="tab-highlight"] {
+    background-color: var(--accent-gold);
+}
+
+.stTabs [data-baseweb="tab-list"] {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stTabs [data-baseweb="tab-panel"] {
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-top: none;
+}
+
+/* Table/Dataframe styling */
+[data-testid="stTable"], .stDataFrame {
+    font-family: 'Source Serif Pro', Georgia, serif;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-testid="stTable"] th, .stDataFrame th {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--accent-gold) !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem 1rem !important;
+    border-bottom: 2px solid var(--accent-gold) !important;
+    letter-spacing: 0.5px;
+}
+
+[data-testid="stTable"] td, .stDataFrame td {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.95rem;
+}
+
+/* Style the Match Score column specially */
+[data-testid="stTable"] td:last-child, .stDataFrame td:last-child {
+    color: var(--accent-gold) !important;
+    font-weight: 600;
+}
+
+/* Style the Title column */
+[data-testid="stTable"] td:first-child, .stDataFrame td:first-child {
+    font-style: italic;
+}
+
+[data-testid="stTable"] tr:nth-child(even) td, .stDataFrame tr:nth-child(even) td {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Add a subtle hover effect */
+[data-testid="stTable"] tr:hover td, .stDataFrame tr:hover td {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+    transition: background-color 0.2s ease;
+}
+
+/* Info and expander styling */
+.stAlert {
+    background-color: var(--bg-secondary);
+    border-left: 4px solid var(--accent-gold);
+    color: var(--text-primary);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.stExpander {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stExpander [data-testid="stExpander"] {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Radio buttons and checkboxes */
+[data-testid="stRadio"] label, [data-testid="stCheckbox"] label {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    color: var(--text-primary);
+}
+
+/* File uploader styling */
+[data-testid="stFileUploader"] {
+    background-color: var(--bg-secondary);
+    border: 1px dashed var(--accent-gold);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-testid="stFileUploadDropzone"] {
+    color: var(--text-primary);
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.import-instruction {
+    font-family: 'Source Serif Pro', Georgia, serif;
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    border-left: 2px solid var(--accent-gold);
+    padding-left: 0.8rem;
+}
+
+/* Success message styling */
+[data-testid="stSuccessMessage"] {
+    background-color: rgba(0, 128, 0, 0.2) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid #00800088 !important;
+    border-radius: 4px;
+    padding: 0.8rem !important;
+    font-family: 'Libre Baskerville', Georgia, serif !important;
+    font-style: italic;
+}
+
+/* Footer styling */
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    color: var(--text-secondary);
+}
+
+.footer-ornament {
+    color: var(--accent-gold);
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    letter-spacing: 0.4rem;
+    opacity: 0.8;
+}
+
+.footer-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.footer-edition {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+}
+
+.footer-subtitle {
+    font-family: 'Source Serif Pro', Georgia, serif;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.footer-quote {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    margin: 0.7rem 0;
+    line-height: 1.4;
+    color: var(--text-muted);
+    max-width: 90%;
+    border-left: 2px solid var(--accent-gold);
+    padding-left: 0.8rem;
+    text-align: left;
+}
+
+.stCaption {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-gold);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-burgundy);
+}
+
+/* For matplotlib figures - adjust figure background and text colors */
+.stPlotlyChart, .stPlot {
+    background-color: var(--bg-secondary) !important;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid var(--border-color);
+}
+
+/* Add decorative elements */
+.main .block-container:before {
+    content: "";
+    display: block;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="%23d4af37" d="M10 0l2.5 7.9H20l-6.5 4.7 2.5 7.9-6.5-4.7-6.5 4.7 2.5-7.9L0 7.9h7.5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: top right;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0.7;
+}
+
+/* Fix specific visualization elements */
+.js-plotly-plot .plotly .main-svg {
+    background-color: var(--bg-secondary) !important;
+}
+
+.js-plotly-plot .plotly .bg {
+    fill: var(--bg-secondary) !important;
+}
+
+.js-plotly-plot .plotly .xtick text, 
+.js-plotly-plot .plotly .ytick text, 
+.js-plotly-plot .plotly .legend .legendtext {
+    fill: var(--text-primary) !important;
+    font-family: 'Libre Baskerville', Georgia, serif !important;
+}
+
+.js-plotly-plot .plotly .gtitle, 
+.js-plotly-plot .plotly .xtitle, 
+.js-plotly-plot .plotly .ytitle {
+    fill: var(--accent-gold) !important;
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 14px !important;
+}
