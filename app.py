@@ -32,11 +32,17 @@ st.set_page_config(
 
 # Apply custom scholarly theme
 def load_custom_css():
-    with open("static/css/scholarly_theme.css", "r") as f:
-        return f.read()
+    try:
+        with open("static/css/scholarly_theme.css", "r") as f:
+            return f.read()
+    except Exception as e:
+        st.error(f"Could not load custom theme: {str(e)}")
+        return ""  # Return empty string if file can't be loaded
         
 # Apply the custom CSS
-st.markdown(f'<style>{load_custom_css()}</style>', unsafe_allow_html=True)
+css = load_custom_css()
+if css:
+    st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 # Add custom icon font for decorative elements
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">', unsafe_allow_html=True)
