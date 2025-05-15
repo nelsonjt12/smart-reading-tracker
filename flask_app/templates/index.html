@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Reading Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scholarly_theme.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Smart Reading Tracker <span class="scholarly-edition">Scholarly Edition</span></h1>
+        <section class="summary">
+            <h2>📖 Your Reading Summary</h2>
+            <p>You rate books <b>{{ summary.rating_diff }}</b> stars higher than Goodreads on average.</p>
+            <ul>
+                <li>Average book length: <b>{{ summary.avg_length }}</b> pages</li>
+                <li>Shortest book: <b>{{ summary.shortest }}</b> pages</li>
+                <li>Longest book: <b>{{ summary.longest }}</b> pages</li>
+                <li>Average time to read: <b>{{ summary.avg_days }}</b> days</li>
+                <li>Average time on to-read list: <b>{{ summary.avg_tbr }}</b> days</li>
+            </ul>
+        </section>
+        <section class="authors">
+            <h2>👩‍💼 Author Analysis</h2>
+            <p>You've read books from <b>{{ summary.authors }}</b> different authors.<br>
+            Author diversity ratio: <b>{{ summary.diversity }}%</b></p>
+            <h3>Most-read authors:</h3>
+            <ul>
+                {% for author, count in summary.top_authors %}
+                <li>{{ author }}: {{ count }} books</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="recommendations">
+            <h2>🌟 Book Recommendations</h2>
+            <ol>
+                {% for rec in summary.recommendations %}
+                <li>
+                    <b>{{ rec.title }}</b> by {{ rec.author }}
+                    (Rating: {{ rec.rating }}, Pages: {{ rec.pages if rec.pages else "Unknown" }})
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
+        <footer>
+            <blockquote>
+                “A reader lives a thousand lives before he dies... The man who never reads lives only one.”<br>
+                <span>― George R.R. Martin</span>
+            </blockquote>
+        </footer>
+    </div>
+</body>
+</html>
