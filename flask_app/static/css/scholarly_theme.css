@@ -22,6 +22,95 @@
     background-color: var(--bg-primary);
 }
 
+/* === Dynamic Section Backgrounds === */
+section {
+    background: linear-gradient(120deg, var(--bg-secondary) 85%, var(--bg-tertiary) 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    margin-bottom: 2.2rem;
+    border: 1.5px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.18s cubic-bezier(.4,0,.2,1), transform 0.18s cubic-bezier(.4,0,.2,1);
+}
+section::before {
+    /* Decorative floating shape */
+    content: '';
+    position: absolute;
+    top: -30px; right: -40px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
+    opacity: 0.12;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(2px);
+}
+section:hover {
+    box-shadow: 0 8px 32px rgba(80,80,120,0.21);
+    transform: translateY(-2px) scale(1.01);
+}
+
+/* === Card-like Recommendations === */
+.recommendations ol li {
+    background: linear-gradient(90deg, var(--bg-secondary) 60%, var(--bg-tertiary) 100%);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.09);
+    margin-bottom: 1.1rem;
+    padding: 1.2rem 1.5rem;
+    border-left: 5px solid var(--accent-gold);
+    position: relative;
+    z-index: 1;
+    transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+}
+.recommendations ol li:hover {
+    border-left: 5px solid var(--accent-burgundy);
+    box-shadow: 0 4px 18px 0 rgba(80,80,120,0.17);
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* === Animated Accent Badges for Key Stats === */
+li b, .summary b {
+    background: linear-gradient(90deg, var(--accent-gold) 60%, var(--accent-burgundy) 100%);
+    color: var(--bg-primary) !important;
+    border-radius: 8px;
+    padding: 0.15em 0.55em;
+    font-weight: 700;
+    font-size: 1em;
+    box-shadow: 0 1px 6px rgba(212,175,55,0.08);
+    margin: 0 0.15em;
+    transition: background 0.18s, color 0.18s;
+    letter-spacing: 0.01em;
+    animation: badge-pop 0.8s cubic-bezier(.4,0,.2,1) 1;
+}
+@keyframes badge-pop {
+    0% { transform: scale(0.7); opacity: 0.3; }
+    50% { transform: scale(1.13); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* === Decorative Dividers === */
+section:not(:last-of-type)::after {
+    content: '✦ ✦ ✦';
+    display: block;
+    text-align: center;
+    color: var(--accent-gold);
+    font-size: 1.3rem;
+    margin: 2.2rem 0 0.5rem 0;
+    opacity: 0.23;
+    letter-spacing: 0.4em;
+    font-family: 'Playfair Display', serif;
+}
+
+/* === Responsive Tweaks === */
+@media (max-width: 700px) {
+    .container { padding: 0.5rem 0.2rem; }
+    section { padding: 1.1rem 0.5rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.2rem; }
+    .recommendations ol li { padding: 0.7rem 0.7rem; }
+}
+
 /* Base body styles */
 html, body, [data-testid="stAppViewContainer"] {
     background-color: var(--bg-primary);
@@ -71,28 +160,38 @@ h3, .stTabs [data-baseweb="tab-panel"] h3 {
 a {
     color: var(--accent-gold);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.18s, text-shadow 0.18s;
+    position: relative;
+    z-index: 2;
 }
-
 a:hover {
     color: var(--accent-burgundy);
-    text-decoration: underline;
+    text-shadow: 0 2px 12px var(--accent-gold), 0 0px 4px var(--accent-burgundy);
+    text-decoration: underline wavy var(--accent-gold);
 }
 
-/* Button styling */
-.stButton button, [data-testid="baseButton-secondary"] {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    background-color: var(--bg-tertiary) !important;
-    color: var(--accent-gold) !important;
-    border: 1px solid var(--accent-gold) !important;
-    border-radius: 4px !important;
-    padding: 0.5rem 1rem !important;
-    transition: all 0.3s ease !important;
-}
-
-.stButton button:hover, [data-testid="baseButton-secondary"]:hover {
-    background-color: var(--accent-gold) !important;
+/* Modern button styling with animation */
+.stButton button, button, input[type="submit"] {
+    font-family: 'Playfair Display', 'Libre Baskerville', Georgia, serif;
+    background: linear-gradient(90deg, var(--accent-gold) 60%, var(--accent-burgundy) 100%);
     color: var(--bg-primary) !important;
+    border: none;
+    border-radius: 10px !important;
+    padding: 0.7rem 1.4rem !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    cursor: pointer;
+    transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+.stButton button:hover, button:hover, input[type="submit"]:hover {
+    background: linear-gradient(90deg, var(--accent-burgundy) 60%, var(--accent-gold) 100%);
+    color: var(--bg-primary) !important;
+    box-shadow: 0 4px 16px rgba(80,80,120,0.17);
+    transform: translateY(-2px) scale(1.03);
 }
 
 /* Metric container styling */
