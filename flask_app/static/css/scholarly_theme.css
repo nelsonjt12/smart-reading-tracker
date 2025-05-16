@@ -512,6 +512,18 @@ blockquote span {
 }
 
 /* For matplotlib figures - adjust figure background and text colors */
+
+/* Visualization image styling for HTML preview */
+.viz-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 14px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.12);
+    background: #222;
+}
+
 .stPlotlyChart, .stPlot {
     background-color: var(--bg-secondary) !important;
     border-radius: 8px;

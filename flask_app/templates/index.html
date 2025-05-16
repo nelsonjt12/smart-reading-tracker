@@ -41,6 +41,14 @@
                 {% endfor %}
             </ol>
         </section>
+        <section class="visualization">
+            <h2>📈 Reading Frequency Over Time</h2>
+            <img src="{{ url_for('static', filename='images/reading_frequency.png') }}" alt="Reading Frequency" class="viz-img">
+        </section>
+        <section class="visualization">
+            <h2>📊 Book Length Distribution</h2>
+            <img src="{{ url_for('static', filename='images/page_distribution.png') }}" alt="Page Distribution" class="viz-img">
+        </section>
         <footer>
             <blockquote>
                 “A reader lives a thousand lives before he dies... The man who never reads lives only one.”<br>
